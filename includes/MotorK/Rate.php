@@ -66,7 +66,7 @@ class Rate
      *
      * @return Rate
      */
-    public static function init()
+    public static function init() : self
     {
         if (is_null(self::$instance)) {
             self::$instance = new self();
@@ -82,7 +82,7 @@ class Rate
      *
      * @param array $args
      */
-    private function applyArguments($args)
+    private function applyArguments(array $args)
     {
         $this->principalAmount = $args[0];
         $this->interestRate = (float) $args[1] / 100;
@@ -93,9 +93,9 @@ class Rate
     /**
      * Calculate effective installment amount
      *
-     * @return number
+     * @return float
      */
-    public function calculate()
+    public function calculate() : float
     {
         return (float) (
             $this->principalAmount * (($this->interestRate) / $this->numberOfInstallments))
@@ -110,7 +110,7 @@ class Rate
      *
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return round($this->calculate(), 2) . ' €';
     }

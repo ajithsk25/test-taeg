@@ -73,7 +73,7 @@ class Taeg
      *
      * @return Taeg
      */
-    public static function init()
+    public static function init() : self
     {
         if (is_null(self::$instance)) {
             self::$instance = new self();
@@ -89,7 +89,7 @@ class Taeg
      *
      * @param array $args
      */
-    private function applyArguments($args)
+    private function applyArguments(array $args)
     {
         $this->principalAmount = $args[0];
         $this->interestRate = $args[1] / 100;
@@ -107,9 +107,9 @@ class Taeg
      * $partial Odd days, as a fraction of a pay period.  10 days of a month is 0.33333...
      * $full Full pay periods before the first payment.  Usually 1.
      *
-     * @return number
+     * @return float
      */
-    public function calculate()
+    public function calculate() : float
     {
         $aprGuess = (float)($this->interestRate / 100) / $this->numberOfInstallments;
         $partial = 0;
@@ -145,9 +145,9 @@ class Taeg
         $interestRate = (float) round($aprGuess, 3);
 
         // call Tae class to find TAE
-        $obj = Tae::init($interestRate, $this->numberOfInstallments);
+        $tae = Tae::init($interestRate, $this->numberOfInstallments);
 
-        return $obj->calculate();
+        return $tae->calculate();
     }
 
     /**
@@ -157,7 +157,7 @@ class Taeg
      * @param float $fractions
      * @param float $rate
      *
-     * @return float|int
+     * @return float
      */
     private function generalEquation($period, $payment, $initialPeriods, $fractions, $rate)
     {
@@ -174,7 +174,7 @@ class Taeg
      *
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return round($this->calculate(), 3) . ' %';
     }

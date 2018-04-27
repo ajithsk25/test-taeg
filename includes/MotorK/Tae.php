@@ -52,7 +52,7 @@ class Tae
      *
      * @return Tae
      */
-    public static function init()
+    public static function init() : self
     {
         if (is_null(self::$instance)) {
             self::$instance = new self();
@@ -68,7 +68,7 @@ class Tae
      *
      * @param array $args
      */
-    private function applyArguments($args)
+    private function applyArguments(array $args)
     {
         $this->interestRate = (float) $args[0] / 100;
         $this->numberOfInstallments = $args[1];
@@ -78,9 +78,9 @@ class Tae
     /**
      * Calculate TAE
      *
-     * @return number
+     * @return float
      */
-    public function calculate()
+    public function calculate() : float
     {
         return (float) (
             pow(
@@ -95,7 +95,7 @@ class Tae
      *
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return round($this->calculate(), 3) . ' %';
     }
