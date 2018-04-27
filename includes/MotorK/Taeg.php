@@ -137,10 +137,10 @@ class Taeg
 
         } while (abs($aprGuess * 10000 - $tempGuess * 10000) > 1);
 
-        $interestRate = round($aprGuess, 3);
+        $interestRate = (float) round($aprGuess, 3);
 
         // call Tae class to find TAE
-        $obj = Tae::init($interestRate, 12);
+        $obj = Tae::init($interestRate, $this->numberOfInstallments);
 
         return $obj->calculate();
     }
