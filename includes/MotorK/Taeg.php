@@ -2,6 +2,11 @@
 
 namespace MotorK;
 
+/**
+ * Class Taeg
+ * 
+ * @package MotorK
+ */
 class Taeg
 {
     /**
